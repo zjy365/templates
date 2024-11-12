@@ -3,14 +3,19 @@ kind: Template
 metadata:
   name: excalidraw
 spec:
-  title: 'Excalidraw'
-  url: 'https://excalidraw.com/'
-  gitRepo: 'https://github.com/excalidraw/excalidraw'
-  author: 'Sealos'
-  description: 'An open source virtual hand-drawn style whiteboard. Collaborative and end-to-end encrypted.'
-  readme: 'https://raw.githubusercontent.com/excalidraw/excalidraw/master/README.md'
-  icon: 'https://avatars.githubusercontent.com/u/59452120?s=48&v=4'
-  templateType: inline
+  title: "Excalidraw"
+  url: "https://excalidraw.com/"
+  gitRepo: "https://github.com/excalidraw/excalidraw"
+  author: "Sealos"
+  description: "An open source virtual hand-drawn style whiteboard. Collaborative and end-to-end encrypted."
+  readme: "https://raw.githubusercontent.com/excalidraw/excalidraw/master/README.md"
+  icon: "https://avatars.githubusercontent.com/u/59452120?s=48&v=4"
+  locale: "zh"
+  i18n:
+    en:
+      title: "TEST"
+      description: "TEST"
+      readme: "https://raw.githubusercontent.com/crmeb/CRMEB/refs/heads/master/README.md"
   categories:
     - tool
   defaults:
@@ -29,8 +34,8 @@ metadata:
   name: ${{ defaults.app_name }}
   annotations:
     originImageName: excalidraw/excalidraw@sha256:36cd9a135e25b17e7e0b1b1d64df5fc1dad651eac72b6f2aa9c1d5401eddc68f
-    deploy.cloud.sealos.io/minReplicas: '1'
-    deploy.cloud.sealos.io/maxReplicas: '1'
+    deploy.cloud.sealos.io/minReplicas: "1"
+    deploy.cloud.sealos.io/maxReplicas: "1"
   labels:
     cloud.sealos.io/app-deploy-manager: ${{ defaults.app_name }}
     app: ${{ defaults.app_name }}
@@ -67,7 +72,6 @@ spec:
           volumeMounts: []
       volumes: []
 
-
 ---
 apiVersion: v1
 kind: Service
@@ -80,7 +84,6 @@ spec:
     - port: 80
   selector:
     app: ${{ defaults.app_name }}
-
 
 ---
 apiVersion: networking.k8s.io/v1
@@ -100,13 +103,13 @@ metadata:
     nginx.ingress.kubernetes.io/server-snippet: |
       client_header_buffer_size 64k;
       large_client_header_buffers 4 128k;
-    nginx.ingress.kubernetes.io/ssl-redirect: 'true'
+    nginx.ingress.kubernetes.io/ssl-redirect: "true"
     nginx.ingress.kubernetes.io/backend-protocol: HTTP
     nginx.ingress.kubernetes.io/rewrite-target: /$2
     nginx.ingress.kubernetes.io/client-body-buffer-size: 64k
     nginx.ingress.kubernetes.io/proxy-buffer-size: 64k
-    nginx.ingress.kubernetes.io/proxy-send-timeout: '300'
-    nginx.ingress.kubernetes.io/proxy-read-timeout: '300'
+    nginx.ingress.kubernetes.io/proxy-send-timeout: "300"
+    nginx.ingress.kubernetes.io/proxy-read-timeout: "300"
     nginx.ingress.kubernetes.io/configuration-snippet: |
       more_clear_headers "X-Frame-Options:";
       more_set_headers "Content-Security-Policy: default-src * blob: data: *.${{ SEALOS_CLOUD_DOMAIN }} ${{ SEALOS_CLOUD_DOMAIN }}; img-src * data: blob: resource: *.${{ SEALOS_CLOUD_DOMAIN }} ${{ SEALOS_CLOUD_DOMAIN }}; connect-src * wss: blob: resource:; style-src 'self' 'unsafe-inline' blob: *.${{ SEALOS_CLOUD_DOMAIN }} ${{ SEALOS_CLOUD_DOMAIN }} resource:; script-src 'self' 'unsafe-inline' 'unsafe-eval' blob: *.${{ SEALOS_CLOUD_DOMAIN }} ${{ SEALOS_CLOUD_DOMAIN }} resource: *.baidu.com *.bdstatic.com; frame-src 'self' *.${{ SEALOS_CLOUD_DOMAIN }} ${{ SEALOS_CLOUD_DOMAIN }} mailto: tel: weixin: mtt: *.baidu.com; frame-ancestors 'self' https://${{ SEALOS_CLOUD_DOMAIN }} https://*.${{ SEALOS_CLOUD_DOMAIN }}";
