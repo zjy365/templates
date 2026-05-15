@@ -8,8 +8,8 @@ spec:
   gitRepo: "https://github.com/toeverything/AFFiNE"
   author: "Sealos"
   description: "A privacy-focussed, local-first, open-source, and ready-to-use alternative for Notion & Miro."
-  readme: "https://raw.githubusercontent.com/toeverything/AFFiNE/canary/README.md"
-  icon: "https://raw.githubusercontent.com/toeverything/AFFiNE/canary/packages/frontend/core/public/favicon-144.png"
+  readme: "./README.md"
+  icon: "./logo.pnd"
   templateType: inline
   categories:
     - tool
